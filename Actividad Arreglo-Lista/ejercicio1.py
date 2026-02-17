@@ -1,5 +1,4 @@
-# 1. Función para crear una página (nodo doble)
-def crear_pagina(url):
+def crear_nodo(url):
     return {
         "url": url,
         "siguiente": None,
@@ -7,42 +6,34 @@ def crear_pagina(url):
     }
 
 def visitar_pagina(actual, nueva_url):
-    nueva = crear_pagina(nueva_url)
+    nuevo_nodo = crear_nodo(nueva_url)
     if actual is not None:
-        actual["siguiente"] = nueva  
-        nueva["anterior"] = actual    
-    return nueva  
-
-
-historial_actual = crear_pagina("google.com")
-print(f"Estoy en: {historial_actual['url']}")
-
-historial_actual = visitar_pagina(historial_actual, "youtube.com")
-print(f"Visitando: {historial_actual['url']}")
-
-historial_actual = visitar_pagina(historial_actual, "github.com")
-print(f"Visitando: {historial_actual['url']}")
-
+        actual["siguiente"] = nuevo_nodo
+        nuevo_nodo["anterior"] = actual
+    return nuevo_nodo
 
 def ir_atras(actual):
-    if actual["anterior"] is not None:
-        print(f"Retrocediendo a: {actual['anterior']['url']}")
-        return actual["anterior"]
-    else:
-        print("No hay páginas atrás.")
-        return actual
+    if actual is not None and actual["anterior"] is not None:
+        actual = actual["anterior"]
+    return actual
 
 def ir_adelante(actual):
-    if actual["siguiente"] is not None:
-        print(f"Avanzando a: {actual['siguiente']['url']}")
-        return actual["siguiente"]
-    else:
-        print("No hay páginas adelante.")
-        return actual
+    if actual is not None and actual["siguiente"] is not None:
+        actual = actual["siguiente"]
+    return actual
 
+# --- PRUEBA DEL PROGRAMA ---
 
-# PROBANDO LA NAVEGACIÓN
-print("\n--- PRUEBA DE BOTONES ---")
-historial_actual = ir_atras(historial_actual)   
-historial_actual = ir_atras(historial_actual)    
-historial_actual = ir_adelante(historial_actual)
+mi_navegador = None
+
+mi_navegador = visitar_pagina(mi_navegador, "google.com")
+mi_navegador = visitar_pagina(mi_navegador, "youtube.com")
+mi_navegador = visitar_pagina(mi_navegador, "github.com")
+
+print(f"Página actual: {mi_navegador['url']}")
+
+mi_navegador = ir_atras(mi_navegador)
+print(f"Tras ir atrás: {mi_navegador['url']}")
+
+mi_navegador = ir_adelante(mi_navegador)
+print(f"Tras ir adelante: {mi_navegador['url']}")
