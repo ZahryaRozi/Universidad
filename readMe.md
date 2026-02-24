@@ -9,8 +9,8 @@ This repository is set up to contain, share and archive activities and assignmen
 * Arreglo-Lista en python
 * Pilas en python
 
-![TetoCOol](./Resources/kasaneteto.jpeg)
-
+![TetoCool](./Resources/kasaneteto.jpeg)
+Image by [emma on Pinterest](https://ca.pinterest.com/pin/854487729347194886/)
 
 ```
 Made with love
